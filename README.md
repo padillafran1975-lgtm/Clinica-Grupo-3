@@ -1,1 +1,0 @@
-# Clinica-Grupo-3
