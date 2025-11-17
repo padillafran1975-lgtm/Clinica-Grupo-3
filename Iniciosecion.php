@@ -66,6 +66,10 @@ if ($usertype == 'd') {
         case 'a': // Admin
             header("Location: views/dashboard-admin.php");
             break;
+        case 'e': // Encargada
+        header("Location: views/dashboard-patient.php");
+        break;
+
         default:
             header("Location: views/dashboard.php");
     }
