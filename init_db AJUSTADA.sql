@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-11-2025 a las 13:42:50
+-- Tiempo de generación: 17-11-2025 a las 04:53:45
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -58,7 +58,8 @@ INSERT INTO `citas` (`id_cita`, `id_paciente`, `id_medico`, `id_sesion`, `fecha`
 (12, 1, 3, 7, '0000-00-00 00:00:00', 60, 'CANCELADA', 700.00, 0, NULL, '2025-11-16 10:01:49'),
 (13, 1, 3, 8, '0000-00-00 00:00:00', 60, 'CANCELADA', 700.00, 0, NULL, '2025-11-16 10:27:19'),
 (14, 1, 3, 7, '0000-00-00 00:00:00', 60, 'CANCELADA', 700.00, 0, NULL, '2025-11-16 10:31:54'),
-(15, 1, 3, 7, '0000-00-00 00:00:00', 60, 'PENDIENTE', 700.00, 0, NULL, '2025-11-16 10:35:25');
+(15, 1, 3, 7, '0000-00-00 00:00:00', 60, 'CANCELADA', 700.00, 0, NULL, '2025-11-16 10:35:25'),
+(16, 1, 3, 14, '0000-00-00 00:00:00', 60, 'CANCELADA', 700.00, 0, NULL, '2025-11-16 22:42:05');
 
 -- --------------------------------------------------------
 
@@ -208,7 +209,8 @@ CREATE TABLE `roles` (
 INSERT INTO `roles` (`id_rol`, `nombre`) VALUES
 (1, 'Administrador'),
 (3, 'Encargada'),
-(2, 'Medico');
+(2, 'Medico'),
+(4, 'paciente');
 
 -- --------------------------------------------------------
 
@@ -234,15 +236,15 @@ CREATE TABLE `sesiones` (
 --
 
 INSERT INTO `sesiones` (`id_sesion`, `id_medico`, `titulo`, `fecha_sesion`, `hora_inicio`, `duracion_minutos`, `cupo_maximo`, `descripcion`, `estado`, `fecha_creacion`) VALUES
-(7, 3, 'Consulta General', '2025-11-16', '09:00:00', 60, 5, 'Consultas generales de medicina familiar', 'activa', '2025-11-16 00:08:48'),
-(8, 3, 'Consulta General', '2025-11-16', '10:00:00', 60, 5, 'Consultas generales de medicina familiar', 'activa', '2025-11-16 00:08:48'),
-(9, 3, 'Consulta General', '2025-11-16', '11:00:00', 60, 5, 'Consultas generales de medicina familiar', 'activa', '2025-11-16 00:08:48'),
-(10, 3, 'Consulta Especializada', '2025-11-17', '14:00:00', 90, 3, 'Consultas especializadas', 'activa', '2025-11-16 00:08:48'),
-(11, 3, 'Consulta General', '2025-11-18', '09:00:00', 60, 5, 'Consulta matutina', 'activa', '2025-11-16 00:08:48'),
-(12, 3, 'Consulta General', '2025-11-19', '15:00:00', 60, 5, 'Consulta vespertina', 'activa', '2025-11-16 00:08:48'),
-(13, 3, 'Consulta General', '2025-11-17', '09:00:00', 60, 5, 'Consulta del 17', 'activa', '2025-11-16 08:49:15'),
-(14, 3, 'Consulta General', '2025-11-18', '09:00:00', 60, 5, 'Consulta del 18', 'activa', '2025-11-16 08:49:15'),
-(15, 3, 'Consulta General', '2025-11-19', '09:00:00', 60, 5, 'Consulta del 19', 'activa', '2025-11-16 08:49:15');
+(7, 3, 'Consulta General', '2025-11-16', '09:00:00', 60, 1, 'Consultas generales de medicina familiar', 'activa', '2025-11-16 00:08:48'),
+(8, 3, 'Consulta General', '2025-11-16', '10:00:00', 60, 1, 'Consultas generales de medicina familiar', 'activa', '2025-11-16 00:08:48'),
+(9, 3, 'Consulta General', '2025-11-16', '11:00:00', 60, 1, 'Consultas generales de medicina familiar', 'activa', '2025-11-16 00:08:48'),
+(10, 3, 'Consulta Especializada', '2025-11-17', '14:00:00', 90, 1, 'Consultas especializadas', 'activa', '2025-11-16 00:08:48'),
+(11, 3, 'Consulta General', '2025-11-18', '09:00:00', 60, 1, 'Consulta matutina', 'activa', '2025-11-16 00:08:48'),
+(12, 3, 'Consulta General', '2025-11-19', '15:00:00', 60, 1, 'Consulta vespertina', 'activa', '2025-11-16 00:08:48'),
+(13, 3, 'Consulta General', '2025-11-17', '09:00:00', 60, 1, 'Consulta del 17', 'activa', '2025-11-16 08:49:15'),
+(14, 3, 'Consulta General', '2025-11-18', '09:00:00', 60, 1, 'Consulta del 18', 'activa', '2025-11-16 08:49:15'),
+(15, 3, 'Consulta General', '2025-11-19', '09:00:00', 60, 1, 'Consulta del 19', 'activa', '2025-11-16 08:49:15');
 
 -- --------------------------------------------------------
 
@@ -278,11 +280,12 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `nombre`, `correo`, `contrasena_hash`, `id_rol`, `activo`, `fecha_creacion`) VALUES
-(1, 'Dr. Ejemplo', 'doctor@example.com', '123', 2, 1, '2025-11-15 04:00:13'),
-(2, 'Juan Pérez', 'juan@example.com', '123', 2, 1, '2025-11-15 04:32:30'),
+(1, 'María González', 'doctor@example.com', '123', 2, 1, '2025-11-15 04:00:13'),
+(2, 'Miguel Rodríguez', 'juan@example.com', '123', 2, 1, '2025-11-15 04:32:30'),
 (3, 'Juan Pérez', 'paciente@test.com', '123456', 3, 1, '2025-11-15 06:25:24'),
 (4, 'Admin Sistema', 'admin@pumacare.com', 'admin123', 1, 1, '2025-11-15 19:27:27'),
-(5, 'Dr. Carlos Martínez', 'drmartinez@pumacare.com', '321', 2, 1, '2025-11-16 00:02:28');
+(5, 'Carlos Martínez', 'drmartinez@pumacare.com', '321', 2, 1, '2025-11-16 00:02:28'),
+(6, 'María Encargada', 'encargada@test.com', '000', 3, 1, '2025-11-17 03:13:10');
 
 --
 -- Índices para tablas volcadas
@@ -386,7 +389,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `citas`
 --
 ALTER TABLE `citas`
-  MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `expedientes`
@@ -428,7 +431,7 @@ ALTER TABLE `pacientes`
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id_rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `sesiones`
@@ -446,7 +449,7 @@ ALTER TABLE `traducciones`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
