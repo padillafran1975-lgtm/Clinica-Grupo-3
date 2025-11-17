@@ -2,7 +2,7 @@
 session_start();
 
 // Verificar sesión
-if (!isset($_SESSION["user"]) || $_SESSION['usertype'] != 'p') {
+if (!isset($_SESSION["user"]) || $_SESSION['usertype'] != 'e') {
     header("location: ../login.php");
     exit();
 }
