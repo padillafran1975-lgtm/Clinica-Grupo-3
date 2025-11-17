@@ -76,8 +76,8 @@ class Usuario {
         $roles = [
             1 => 'a', // Admin
             2 => 'd', // Medico
-            3 => 'p', // Paciente
-            4 => 'e'  
+            3 => 'e', // Encargada
+            4 => 'p'  // Paciente
         ];
         
         return $roles[$id_rol] ?? null;
