@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     session_start();
 
     // Validar usuario logueado
-    if (!isset($_SESSION['user']) || $_SESSION['usertype'] != 'p') {
+    if (!isset($_SESSION['user']) || $_SESSION['usertype'] != 'e') {
         header("Location: ../login.php");
         exit();
     }
