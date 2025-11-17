@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION["user"]) || $_SESSION['usertype'] != 'p') {
+if (!isset($_SESSION["user"]) || $_SESSION['usertype'] != 'e') {
     header("location: ../login.php");
     exit();
 }
